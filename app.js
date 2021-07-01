@@ -19,7 +19,13 @@ app.get('/search', (req, res) => {
   const restaurants = restaurantList.results.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
   })
-  res.render('index', { restaurants: restaurants })
+  // 顯示無搜尋結果頁面
+  if (restaurants.length > 0) {
+    res.render('index', { restaurants: restaurants })
+  } else {
+    res.render('index', { no_results: '<h3>搜尋沒有結果</h3>' })
+  }
+
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
