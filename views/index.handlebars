@@ -1,12 +1,28 @@
 <div class="banner"></div>
 <div class="container mt-5">
 
-  <!-- search bar -->
+
+
   <div class="row" id="search-bar">
+
     <div class="col-12">
       <form action="/search">
         <div class="input-group mb-3">
-          <input type="text" name="keyword" class="form-control" placeholder="搜尋你喜愛的餐廳吧" aria-label="Movie Name..."
+          <!--category-->
+          <select class="form-select" name="keyword" onchange="this.form.submit()" aria-label="Default select example">
+            <option selected disabled>
+              <p>選擇餐廳類別</p>
+            </option>
+            <option>咖啡</option>
+            <option>酒吧</option>
+            <option>中東料理</option>
+            <option>日本料理</option>
+            <option>義式餐廳</option>
+            <option>美式</option>
+          </select>
+
+          <!-- search bar -->
+          <input type="text" name="keyword" class="form-control " placeholder="搜尋你喜愛的餐廳名稱吧" aria-label="Movie Name..."
             aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit" id="search-button">GO</button>
@@ -15,6 +31,10 @@
       </form>
     </div>
   </div>
+
+
+
+
 
   <!-- movie list -->
 
