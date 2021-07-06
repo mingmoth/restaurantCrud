@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="banner"></div>
 <div class="container mt-5">
 
@@ -59,4 +60,67 @@
       </div>
     </div>
     {{/each}}
+=======
+<div class="banner"></div>
+<div class="container mt-5">
+
+
+
+  <div class="row" id="search-bar">
+
+    <div class="col-12">
+      <form action="/search">
+        <div class="input-group mb-3">
+          <!--category-->
+          <select class="form-select" name="keyword" onchange="this.form.submit()" aria-label="Default select example">
+            <option selected disabled>
+              <p>選擇餐廳類別</p>
+            </option>
+            <option>咖啡</option>
+            <option>酒吧</option>
+            <option>中東料理</option>
+            <option>日本料理</option>
+            <option>義式餐廳</option>
+            <option>美式</option>
+          </select>
+
+          <!-- search bar -->
+          <input type="text" name="keyword" class="form-control " placeholder="搜尋你喜愛的餐廳名稱吧" aria-label="Movie Name..."
+            aria-describedby="search-button">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="search-button">GO</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- movie list -->
+
+  <div class='row' id='data-panel'>
+    {{{no_results}}}
+    {{#each restaurants}}
+    <div class="col-sm-3" id='card-container'>
+      <div class="card">
+        <div class="card-image" title="{{ this.name }}">
+          <a href="/restaurants/{{ this.id }}" class="text-decoration-none">
+            <img src="{{this.image}}" class="card-img-top" alt="{{this.image}}">
+          </a>
+        </div>
+        <div class="card-body">
+          <a href="/restaurants/{{ this.id }}" class="card-title h5 text-decoration-none d-block"
+            title="{{ this.name }}">{{
+            this.name }}</a>
+          <span class="badge bg-info"><i class="fas fa-utensils pr-2"></i>{{ this.category }}</span>
+          <span class="badge bg-warning text-dark"><i class="bi bi-star-fill me-1"></i>{{ this.rating }}<i
+              class="fas fa-star fa-xs"></i></span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+>>>>>>> a4233f95d2d1ea4118aa9b11e10fffb967cbcc5e
   </div>
