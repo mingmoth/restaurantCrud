@@ -118,6 +118,35 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/search', (req, res) => {
+
+  const keyword = req.query.keyword[0]
+  const form = req.query
+  console.log(form)
+  console.log(keyword)
+
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      restaurants = restaurants.filter(restaurant => {
+        if (form.keyword.length === 2) {
+          console.log(restaurant.category)
+          return restaurant.category.includes(keyword)
+        } else {
+          return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+        }
+
+      })
+      if (restaurants.length > 0) {
+        res.render('index', { restaurants: restaurants })
+      } else {
+        res.render('index', { no_results: `<h3>使用${keyword}沒有搜尋結果</h3>` })
+      }
+    })
+    .catch(error => console.log(error))
+
+})
+
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
 })
