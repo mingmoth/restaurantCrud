@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurantData.js')
+// 載入 method-override
+const methodOverride = require('method-override')
 
 const app = express()
 const port = 3000
@@ -25,14 +27,14 @@ app.set('view engine', 'handlebars')
 
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
-
 app.use(express.static('public'))
-
-
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
+    .sort({ _id: 'asc' }) //根據 _id 升冪排序
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
 })
@@ -81,7 +83,7 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id/edit', (req, res) => {
 
   const name = req.body.name
   const name_en = req.body.name_en
@@ -110,7 +112,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
