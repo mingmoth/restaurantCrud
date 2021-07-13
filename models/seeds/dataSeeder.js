@@ -1,13 +1,14 @@
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 const restaurantData = require('../restaurantData') // 載入 restaurantData model
 
 const restaurantList = require('../../restaurant.json')
 const raw = restaurantList.results
 
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+//mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
-const db = mongoose.connection
+//const db = mongoose.connection
 
+require('./config/mongoose')
 
 db.on('error', () => {
   console.log('mongodb error!')
