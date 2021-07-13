@@ -1,27 +1,31 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 // const Restaurant = require('./models/restaurantData.js')
 // 載入 method-override
 const methodOverride = require('method-override')
 // 引用路由器
 const routes = require('./routes')
+//引用 Mongoose
+require('./config/mongoose')
 const app = express()
 const port = 3000
 
 // MongoDB 的 3.1.0 版之前，向資料庫連線時不一定要加上 port，但在 3.1.0 版本後，連線資料庫時一定要加上 port。
+
 // add { useNewUrlParser: true, useUnifiedTopology: true }
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
-const db = mongoose.connection
+// mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
-db.on('error', () => {
-  console.log('mongodb error')
-})
+// const db = mongoose.connection
 
-db.once('open', () => {
-  console.log('mongodb connected')
-})
+// db.on('error', () => {
+//   console.log('mongodb error')
+// })
+
+// db.once('open', () => {
+//   console.log('mongodb connected')
+// })
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
