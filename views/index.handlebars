@@ -50,14 +50,14 @@
           <a href="./restaurants/{{ this._id }}" class="card-title h5 text-decoration-none d-block"
             title="{{ this.name }}">{{
             this.name }}</a>
-          <span class="badge bg-info p-2"><i class="fas fa-utensils pr-2"></i>{{ this.category }}</span>
-          <span class="badge bg-warning text-dark p-2"><i class="bi bi-star-fill me-1"></i>{{ this.rating }}<i
+          <span class="badge bg-info p-2 m-1"><i class="fas fa-utensils pr-2"></i>{{ this.category }}</span>
+          <span class="badge bg-warning p-2 m-1"><i class="bi bi-star-fill me-1"></i>{{ this.rating }}<i
               class="fas fa-star fa-xs"></i></span>
           <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-outline-info p-1 mt-3 ml-2"
-              href="/restaurants/{{this._id}}/edit">Edit</button>
-            <form action="./restaurants/{{this._id}}?_method=DELETE" method="POST" style="display: inline">
-              <button type="submit" class="btn btn-info p-1 mt-3 ml-2">Delete</button>
+            <a type="button" class="btn btn-outline-info p-1 mt-3 ml-2" href="/restaurants/{{this._id}}/edit">Edit</a>
+            <form action="./restaurants/{{this._id}}?_method=DELETE" method="POST" style="display: inline"
+              onSubmit="return confirm('Are you sure you wish to delete {{this.name}}?');">
+              <button type="submit" class="btn btn-outline-warning btn-delete p-1 mt-3 ml-2">Delete</button>
             </form>
           </div>
         </div>
