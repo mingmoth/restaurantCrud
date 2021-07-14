@@ -1,6 +1,8 @@
 // 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
+// 引用sortData
+// const sortData = require('../../config/sorData.json')
 
 // 引用 restaurantData model
 const Restaurant = require('../../models/restaurantData')
@@ -15,18 +17,24 @@ router.get('/', (req, res) => {
 })
 
 router.get('/search', (req, res) => {
-
-  const keyword = req.query.keyword
   const form = req.query
-  console.log(form)
-  console.log(keyword)
+  const keyword = req.query.keyword
+  // const sortOption = req.query.sortOption
+  // const sort = {
+  //   nameAsc: {name: 'asc'},
+  //   nameDesc: {name: 'desc'},
+  //   category: {category: 'asc'},
+  //   location: {location: 'asc'},
+  //   rating: {rating: 'desc'}
+  // }
 
   Restaurant.find()
     .lean()
+    // .sort(sort[sortOption])
     .then((restaurants) => {
       restaurants = restaurants.filter(restaurant => {
-        if (form.keyword.length === 2) {
-          
+        if (keyword.length === 2) {
+
           return restaurant.category.includes(keyword[0])
         } else {
           return restaurant.name.toLowerCase().includes(keyword.toLowerCase())

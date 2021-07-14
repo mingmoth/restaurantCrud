@@ -8,7 +8,7 @@ const raw = restaurantList.results
 
 //const db = mongoose.connection
 
-require('./config/mongoose')
+const db = require('../../config/mongoose')
 
 db.on('error', () => {
   console.log('mongodb error!')
