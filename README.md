@@ -25,6 +25,9 @@ cd restaurantCrud
 ```
 npm install
 ```
+```
+npm run seed
+```
 4. 啟動專案
 ```
 npm run dev
