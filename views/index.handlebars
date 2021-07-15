@@ -6,26 +6,28 @@
     <div class="col-12">
       <form action="/search">
         <div class="input-group mb-3">
-          <!--category-->
-          <select class="form-select" name="keyword" onchange="this.form.submit()" aria-label="Default select example">
-            <option selected disabled>
-              <p>選擇餐廳類別</p>
-            </option>
-            <option>咖啡</option>
-            <option>酒吧</option>
-            <option>中東料理</option>
-            <option>日本料理</option>
-            <option>義式餐廳</option>
-            <option>美式</option>
-          </select>
 
+          <!--選擇餐廳排序-->
+          <div class="search-bar-inner">
+            <div class="input-group align-items-end">
+              <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
+                <option value="">選擇餐廳排序</option>
+                {{#each sortData}}
+                <option value="{{this.value}}" {{#isEqual this.value ../sortOption}} selected {{/isEqual}}>
+                  {{this.option}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
           <!-- search bar -->
           <input type="text" name="keyword" class="form-control " placeholder="搜尋你喜愛的餐廳名稱吧" aria-label="Movie Name..."
-            aria-describedby="search-button">
+            value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit" id="search-button">GO</button>
           </div>
         </div>
+
+        
       </form>
     </div>
   </div>
@@ -37,7 +39,9 @@
   <!-- movie list -->
 
   <div class='row' id='data-panel'>
-    {{{no_results}}}
+    {{#if error}}
+    <h2>{{this.error}}</h2>
+    {{/if}}
     {{#each restaurants}}
     <div class="col-sm-3" id='card-container'>
       <div class="card">

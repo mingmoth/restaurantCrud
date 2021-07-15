@@ -27,7 +27,7 @@ const port = 3000
 //   console.log('mongodb connected')
 // })
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({ defaultLayout: 'main', helpers: require('./controller/handlebarsHelper') }))
 app.set('view engine', 'handlebars')
 
 // setting body-parser

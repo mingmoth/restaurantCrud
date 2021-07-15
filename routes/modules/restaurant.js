@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurantData')
 
-
 //create
 router.get('/new', (req, res) => {
   return res.render('new')
