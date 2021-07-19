@@ -11,6 +11,9 @@ require('./config/mongoose')
 const app = express()
 const port = 3000
 
+// 否則為本地環境，使用 3000 
+const PORT = process.env.PORT || 3000
+
 // MongoDB 的 3.1.0 版之前，向資料庫連線時不一定要加上 port，但在 3.1.0 版本後，連線資料庫時一定要加上 port。
 
 // add { useNewUrlParser: true, useUnifiedTopology: true }
@@ -159,6 +162,11 @@ app.use(express.static('public'))
 
 // })
 
-app.listen(port, () => {
-  console.log(`Express is listening on localhost:${port}`)
+// app.listen(port, () => {
+//   console.log(`Express is listening on localhost:${port}`)
+// })
+
+// 設定應用程式監聽的埠號
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`)
 })
