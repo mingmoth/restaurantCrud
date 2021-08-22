@@ -1,11 +1,13 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const session = require('express-session')
 //const mongoose = require('mongoose')
 // const Restaurant = require('./models/restaurantData.js')
 // 載入 method-override
 const methodOverride = require('method-override')
 // 引用路由器
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 //引用 Mongoose
 require('./config/mongoose')
 const app = express()
@@ -18,12 +20,18 @@ const PORT = process.env.PORT || 3000
 app.engine('handlebars', exphbs({ defaultLayout: 'main', helpers: require('./controller/handlebarsHelper') }))
 app.set('view engine', 'handlebars')
 
+app.use(session({
+  secret: 'ThisisMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
 
 // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
 
+usePassport(app)
 // 將 request 導入路由器
 app.use(routes)
 
