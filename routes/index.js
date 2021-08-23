@@ -9,11 +9,14 @@ const restaurants = require('./modules/restaurant')
 
 const users = require('./modules/users')
 
+const { authenticator } = require('../middleware/auth')
 // 將網址結構符合 / 字串的 request 導向 home 模組 
-router.use('/', home)
+
 
 // 將網址結構符合 /restaurants 字串開頭的 request 導向 restaurant 模組
-router.use('/restaurants', restaurants)
+router.use('/restaurants', authenticator, restaurants)
 router.use('/users', users)
+
+router.use('/', authenticator, home)
 // 匯出路由器
 module.exports = router
