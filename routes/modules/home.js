@@ -10,7 +10,8 @@ const monngoose = require('mongoose')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({userId})
     .lean()
     .sort({ _id: 'asc' })
     .then(restaurants => res.render('index', { restaurants, sortData }))
